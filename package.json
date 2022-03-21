@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "nm": "nodemon main.ts 8080"
+    "nm": "nodemon main.ts 8080",
+    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm main.ts"
   },
+  "type": "module",
   "dependencies": {
     "axios": "^0.26.1",
     "data-store": "^4.0.3",
@@ -10,7 +12,8 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0"
   },
   "nodemonConfig": {
     "ignore": [

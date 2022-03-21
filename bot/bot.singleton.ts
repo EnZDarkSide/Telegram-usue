@@ -1,7 +1,7 @@
 import { ContactsService } from './../services/contacts.service';
 import { Telegraf } from 'telegraf';
 import * as dotenv from "dotenv";
-dotenv.config({ path: __dirname + '/../.env' });
+dotenv.config({ path: process.cwd() + '/.env' });
 
 export class Bot {
     private static instance: Telegraf;
