@@ -3,6 +3,9 @@
     "nm": "nodemon main.ts 8080",
     "start": "node --experimental-specifier-resolution=node --loader ts-node/esm main.ts"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "type": "module",
   "dependencies": {
     "axios": "^0.26.1",
