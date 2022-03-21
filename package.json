@@ -1,12 +1,13 @@
 {
   "scripts": {
     "nm": "nodemon main.ts 8080",
-    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm main.ts"
+    "build": "rd /s /q dist && tsc",
+    "start": "node ./dist/main.js"
   },
+  "main": "main.js",
   "engines": {
     "node": "16.x"
   },
-  "type": "module",
   "dependencies": {
     "axios": "^0.26.1",
     "data-store": "^4.0.3",

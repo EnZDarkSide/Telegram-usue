@@ -1,20 +1,25 @@
 {
     "compilerOptions": {
-      "module": "ESNext",
-      "esModuleInterop": true,
-      "target": "ESNext",
-      "moduleResolution": "Node",
-      "outDir": "dist",
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "isolatedModules": false,
-      "strict": true,
+      "target": "es6",
+      "module": "commonjs",
+      "jsx": "react-native",
+      "lib": ["dom", "es2015", "es2016"],
+      "declaration": true,
+      "sourceMap": true,
+      "outDir": "./dist",
+      "removeComments": true,
       "noImplicitAny": true,
-      "useUnknownInCatchVariables": false,
-      "inlineSourceMap": true
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "strictPropertyInitialization": true,
+      "noImplicitThis": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": false
     },
-    "ts-node": {
-        "esm": true
-    },
-    "lib": ["esnext"]
-}
+    "exclude": ["node_modules"],
+    "include": ["./**/*.ts"]
+  }

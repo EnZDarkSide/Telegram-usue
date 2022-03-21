@@ -1,4 +1,3 @@
-import { ContactsService } from './../services/contacts.service';
 import { Telegraf } from 'telegraf';
 import * as dotenv from "dotenv";
 dotenv.config({ path: process.cwd() + '/.env' });
@@ -6,7 +5,7 @@ dotenv.config({ path: process.cwd() + '/.env' });
 export class Bot {
     private static instance: Telegraf;
 
-    private constructor(cs: ContactsService) {}
+    private constructor() {}
 
     public static getInstance(routes?: any[]): Telegraf {
         if (!process.env.BOT_TOKEN)
