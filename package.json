@@ -1,7 +1,8 @@
 {
   "scripts": {
+    "debug": "nodemon --inspect main.ts",
     "nm": "nodemon main.ts 8080",
-    "build-windows": "rd /s /q dist && tsc",
+    "build-windows": "(if exist dist rd /s /q dist) && tsc",
     "build": "rm -rf ./dist/* && tsc",
     "start": "node ./dist/main.js"
   },
