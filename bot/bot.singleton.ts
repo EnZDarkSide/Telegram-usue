@@ -4,7 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: process.cwd() + '/.env' });
 
 export class Bot {
-    private static botInstance: Telegraf;
+    private static instance: Telegraf;
     private static cs: ContactsService;
 
     private constructor() {}
@@ -13,10 +13,13 @@ export class Bot {
         if (!process.env.BOT_TOKEN)
             throw Error("No token provided");
 
-        Bot.initRoutes()
-        Bot.cs ??= new ContactsService();
-        Bot.botInstance ??= new Telegraf(process.env.BOT_TOKEN);
-        return Bot.botInstance;
+        if(Bot.instance)
+            return Bot.instance;
+
+        Bot.cs = new ContactsService();
+        Bot.instance = new Telegraf(process.env.BOT_TOKEN);
+        Bot.initRoutes();
+        return Bot.instance;
     }
 
     public static initRoutes() {
