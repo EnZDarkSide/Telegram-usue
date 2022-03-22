@@ -9,13 +9,11 @@ export class Bot {
 
     private constructor() {}
 
-    public static getInstance(routes?: any[]): Telegraf {
+    public static getInstance(): Telegraf {
         if (!process.env.BOT_TOKEN)
             throw Error("No token provided");
 
-        if (routes)
-            Bot.initRoutes()
-
+        Bot.initRoutes()
         Bot.cs ??= new ContactsService();
         Bot.botInstance ??= new Telegraf(process.env.BOT_TOKEN);
         return Bot.botInstance;
@@ -26,7 +24,7 @@ export class Bot {
             ctx.reply(
                 'Приветствую! С помощью этого бота вы можете узнать информацию об интересующем вас учебном заведении!\n'+
                 'Примеры запросов:\n'+
-                '•УрГЭУ;\n•УрГЭУ Екатеринбург;\n•Экономический университет Екатеринбург;\n•Екатеринбург 8 марта 62 универ.\nHarvard university');
+                '•УрГЭУ;\n•УрГЭУ Екатеринбург;\n•Экономический университет Екатеринбург;\n•Екатеринбург 8 марта 62 универ.\n•Harvard university');
         })
 
         Bot.getInstance().on('text', (ctx) => {
