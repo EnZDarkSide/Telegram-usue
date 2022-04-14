@@ -1,11 +1,14 @@
+import { DoubleGisService } from './../services/dgis.service';
 import { ContactsService } from './../services/contacts.service';
 import { Telegraf } from 'telegraf';
 import * as dotenv from "dotenv";
+import { Reviews } from '../interfaces/doublegis.interface';
 dotenv.config({ path: process.cwd() + '/.env' });
 
 export class Bot {
     private static instance: Telegraf;
     private static cs: ContactsService;
+    private static dGis: DoubleGisService;
 
     private constructor() {}
 
@@ -17,6 +20,7 @@ export class Bot {
             return Bot.instance;
 
         Bot.cs = new ContactsService();
+        Bot.dGis = new DoubleGisService();
         Bot.instance = new Telegraf(process.env.BOT_TOKEN);
         Bot.initRoutes();
         return Bot.instance;
@@ -37,14 +41,20 @@ export class Bot {
                     return;
                 }
 
-                const resText =
-                    `Название: ${data.name ?? 'Неизвестно'}\n` +
-                    `Адрес: ${data.address ?? 'Неизвестно'}\n` +
-                    `Веб-сайт: \n${data.url ?? 'Неизвестно'}\n` +
-                    `Телефоны: \n${data.Phones?.map((p: any) => p.formatted).join('\n') ?? 'Неизвестно'}\n`;
-        
-                ctx.reply(resText)
-            })
+                const CompanyMetaData = data.properties.CompanyMetaData;
+                const phones = CompanyMetaData.Phones?.map((p) => p.formatted);
+
+                Bot.dGis.getOrgReviewsByName(CompanyMetaData.name, {coordinates: data.geometry.coordinates, radius: 500}).then((reviews: Reviews) => {
+                    const resText =
+                        `Название: ${CompanyMetaData.name ?? 'Неизвестно'}\n` +
+                        `Адрес: ${CompanyMetaData.address ?? 'Неизвестно'}\n` +
+                        `Веб-сайт: \n${CompanyMetaData.url ?? 'Неизвестно'}\n` +
+                        `Телефоны: \n${phones?.join('\n') ?? 'Неизвестно'}\n` +
+                        `Рейтинг: ${reviews.org_rating}⭐`;
+
+                    ctx.reply(resText);
+                });
+            });
         });
     }
 }

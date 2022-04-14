@@ -27,7 +27,7 @@ export interface OrganizationSearchResponse {
   }
   export interface Geometry {
     type: string;
-    coordinates?: (number)[] | null;
+    coordinates: (number)[];
   }
   export interface Properties1 {
     name: string;
