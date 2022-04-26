@@ -50,7 +50,7 @@ export class Bot {
                         `Адрес: ${CompanyMetaData.address ?? 'Неизвестно'}\n` +
                         `Веб-сайт: \n${CompanyMetaData.url ?? 'Неизвестно'}\n` +
                         `Телефоны: \n${phones?.join('\n') ?? 'Неизвестно'}\n` +
-                        `Рейтинг: ${reviews.org_rating}⭐`;
+                        `Рейтинг 2ГИС: ${reviews.org_rating}`;
 
                     ctx.reply(resText);
                 });

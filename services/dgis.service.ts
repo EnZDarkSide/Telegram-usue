@@ -50,8 +50,8 @@ export class DoubleGisService {
       "items.rubrics",
     ];
     options.radius ??= 50000;
-    options.rubric_id ??= 232;
-    // Центр ЕКБ
+    options.rubric_id ??= 6;
+    // Центр Екатеринбурга
     options.coordinates ??= [60.583827, 56.758741];
     return options;
   }
