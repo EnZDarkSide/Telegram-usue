@@ -1,10 +1,4 @@
-export const STORE_OPTIONS = { path: process.cwd() + '/data/data.json'};
-
-export const DATA_SCHEME = {
-    users: [],
-    count: 0,
-}
-
+// рубрики для фильтрации организаций по поиску через Яндекс API
 export const ALLOWED_CLASSES = [
     "college"
 ]

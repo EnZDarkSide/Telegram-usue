@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as dotenv from "dotenv";
 import { ALLOWED_CLASSES } from '../consts';
-import { FeaturesEntity, OrganizationSearchResponse } from '../interfaces/company.interface';
+import { FeaturesEntity, OrganizationSearchResponse } from '../interfaces/yandex.interface';
 dotenv.config({ path: process.cwd() + '/.env' });
 
 if(!process.env.YANDEX_TOKEN)
