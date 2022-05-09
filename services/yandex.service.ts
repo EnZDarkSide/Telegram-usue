@@ -2,6 +2,8 @@ import axios from 'axios';
 import * as dotenv from "dotenv";
 import { ALLOWED_CLASSES } from '../consts';
 import { FeaturesEntity, OrganizationSearchResponse } from '../interfaces/yandex.interface';
+
+// добавляем токены в среду
 dotenv.config({ path: process.cwd() + '/.env' });
 
 if(!process.env.YANDEX_TOKEN)
@@ -9,7 +11,7 @@ if(!process.env.YANDEX_TOKEN)
 
 const API_KEY = process.env.YANDEX_TOKEN;
 
-export class ContactsService {
+export class YandexService {
     public type = 'biz';
     public lang = 'ru_RU';
     public results = 10;
@@ -19,6 +21,7 @@ export class ContactsService {
         if(!API_KEY)
             throw Error("no Yandex Api key provided");
 
+        // Запрос на получение данных об организации
         const url = encodeURI(`https://search-maps.yandex.ru/v1/?text=${name}&type=${this.type}&snippets=${this.ratingSnippet}&lang=${this.lang}&results=${this.results}&apikey=${API_KEY}`);
         return axios.get(url, { headers: {'X-Auth-Key': API_KEY}})
             .then((res: {data: OrganizationSearchResponse}) => res.data.features)
@@ -26,11 +29,13 @@ export class ContactsService {
                 if(!features)
                     return null;
 
+                // Находим только заведения, относящиеся к категории "college"
                 const companyInfo = features.filter(f => {
                     const res = f.properties.CompanyMetaData.Categories.find(c => ALLOWED_CLASSES.includes(c.class));
                     return res;
                 })[0];
 
+                // Возвращаем информацию о первой подходящей компании
                 return companyInfo;
         });
     }
